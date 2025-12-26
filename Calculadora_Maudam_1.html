@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MAUDAM SAS - Crédito Prendario</title>
+
+        <style>
+            /* ====== ESTILOS GENERALES ====== */
+            body{
+                margin:0;
+                font-family:'Segoe UI',sans-serif;
+                background:url(IMAGEN.jpg) center/cover;
+                color:#fff;
+                padding:20px 10px;
+            }
+            .container{
+                max-width:1100px;
+                margin:auto;
+                background:#fff;
+                color:#1e293b;
+                border-radius:24px;
+                overflow:hidden;
+                box-shadow:0 30px 100px rgba(0,0,0,.4);
+            }
+            header{
+                /* background:linear-gradient(135deg,#84c8b2,#64b28a); */
+                /* background:linear-gradient(135deg,#39936b,#39936b); */
+                background:linear-gradient(135deg,#37ab77,#37ab77);
+                padding:40px 20px;
+                text-align:center;
+                color:#fff;
+            }
+            h1{margin:5px 0;font-size:2.6rem}
+            .subtitle{font-size:1.2rem}
+
+            /* ====== SIMULADOR VEHÍCULO ====== */
+            .calc-container{
+                margin-top:30px;
+            }
+            .inputs{
+                display:grid;
+                grid-template-columns:1fr 1fr;
+                gap:20px;
+                margin-top:20px;
+            }
+            input,select{
+                width:90%;
+                padding:14px;
+                font-size:1.1rem;
+                border-radius:30px;
+                border:2px solid #ccc;
+            }
+            .resultado{
+                margin-top:25px;
+            }
+            #montoMaximo{
+                font-size:2rem;
+                color:#dc2626;
+                font-weight:bold;
+            }
+
+            /* ====== CALCULADORA ====== */
+            .calc-section{
+                padding:40px 20px;
+                text-align:center;
+            }
+            .input-monto{
+                width:80%;
+                max-width:400px;
+                padding:16px;
+                font-size:1.5rem;
+                text-align:center;
+                border-radius:14px;
+                border:3px solid #e2e8f0;
+            }
+            .cards-grid{
+                display:grid;
+                grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+                gap:20px;
+                margin-top:30px;
+            }
+            .card{
+                background:#1e293b;
+                color:#fff;
+                padding:25px;
+                border-radius:16px;
+                box-shadow:0 10px 25px rgba(0,0,0,.3);
+            }
+            .card h3{margin-bottom:10px;color:#cbd5e1}
+            .valor{font-size:2rem;font-weight:bold;color:#fbbf24}
+            .neto{color:#86efac}
+
+            /* ====== CUOTAS ====== */
+            .card-cuota{
+                background:#f8fafc;
+                color:#0f172a;
+                border:3px solid #e2e8f0;
+            }
+            .meses{font-size:1.5rem;font-weight:bold;color:#72a091}
+            .cuota{font-size:2.6rem;font-weight:900;color:#72a091}
+            .total{font-weight:bold}
+
+            /* ====== WHATSAPP ====== */
+            .whatsapp-btn{
+                margin:40px auto;
+                padding:18px 35px;
+                background:#25d366;
+                color:#fff;
+                font-size:1.4rem;
+                border:none;
+                border-radius:50px;
+                cursor:pointer;
+                display:flex;
+                align-items:center;
+                gap:15px;
+                box-shadow:0 10px 30px rgba(37,211,102,.4);
+            }
+            .whatsapp-btn img{height:36px}
+
+            /* ====== FOOTER ====== */
+            footer{
+                background:#0f172a;
+                color:#cbd5e1;
+                text-align:center;
+                padding:30px;
+            }
+
+            /* ====== MOBILE ====== */
+            @media(max-width:768px){
+                .inputs{grid-template-columns:1fr}
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <h1 style="color:#000">MAUDAM SAS</h1>
+                <h1>Crédito Prendario</h1>
+                <p class="subtitle">Simulá tu préstamo en segundos</p>
+
+                <div class="calc-container">
+                    <h2>¿Cuánto te prestamos por tu auto?</h2>
+
+                    <div class="inputs">
+                        <div>
+                            <label>Valor del vehículo ($)</label>
+                            <input type="number" id="valorVehiculo" value="15000000">
+                        </div>
+                        <div>
+                            <label>Año del vehículo</label>
+                            <select id="anioVehiculo">
+                            <option value="2025">2024 - 2025</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                            <option value="2014">2014</option>
+                            <option value="2013">2013</option>
+                            <option value="2012">2012</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="resultado">
+                        <p>Monto máximo:</p>
+                        <div id="montoMaximo">$0</div>
+                        <div id="textoPorcentaje"></div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="calc-section">
+                <h2>Calculadora de Crédito</h2>
+
+                <input type="number" id="montoFinanciar" class="input-monto" value="8000000">
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Monto solicitado</h3>
+                        <p class="valor" id="mostrarMonto">$0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Gastos MAUDAM</h3>
+                        <p class="valor">$500.000</p>
+                    </div>
+                    <div class="card">
+                        <h3>Neto a recibir</h3>
+                        <p class="valor neto" id="mostrarNeto">$0</p>
+                    </div>
+                </div>
+
+                <div class="cards-grid" id="cuotas"></div>
+
+                <button class="whatsapp-btn" id="btnWhatsApp">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+                    Enviar por WhatsApp
+                </button>
+            </section>
+
+            <footer>
+                <strong>Consultar con DNI y título del vehículo</strong><br>
+                MAUDAM SAS • Créditos prendarios • Sujeto a aprobación
+            </footer>
+
+        </div>
+
+        <script>
+            /* ====== CONSTANTES ====== */
+            const GASTOS = 500000;
+            const COEF = {12:131.88,24:87.585,36:75.916,48:71.108,60:68.857};
+            const TEL = "5493571311891";
+
+            /* ====== ELEMENTOS ====== */
+            const valorVehiculo = document.getElementById("valorVehiculo");
+            const anioVehiculo = document.getElementById("anioVehiculo");
+            const montoMaximo = document.getElementById("montoMaximo");
+            const textoPorcentaje = document.getElementById("textoPorcentaje");
+
+            const montoFinanciar = document.getElementById("montoFinanciar");
+            const mostrarMonto = document.getElementById("mostrarMonto");
+            const mostrarNeto = document.getElementById("mostrarNeto");
+            const cuotasDiv = document.getElementById("cuotas");
+            const btnWhatsApp = document.getElementById("btnWhatsApp");
+
+            /* ====== FUNCIONES ====== */
+            function calcularPrestamo(){
+                const valor = +valorVehiculo.value || 0;
+                const anio = +anioVehiculo.value;
+                let porc = 0, txt="";
+
+                if(anio>=2024){porc=80;txt="80% (0 a 1 año)";}
+                else if(anio>=2020){porc=70;txt="70% (2 a 5 años)";}
+                else if(anio>=2015){porc=60;txt="60% (6 a 10 años)";}
+                else if(anio>=2012){porc=50;txt="50% (11 a 13 años)";}
+                else{txt="No financiable";}            
+
+                const max = Math.floor(valor*porc/100/1000)*1000;
+                montoMaximo.textContent = "$"+max.toLocaleString("es-AR");
+                textoPorcentaje.textContent = txt;
+            }
+
+            function calcularTodo(){
+                const monto = +montoFinanciar.value || 0;
+                const neto = monto - GASTOS;
+
+                mostrarMonto.textContent = "$"+monto.toLocaleString("es-AR");
+                mostrarNeto.textContent = neto>0 ? "$"+neto.toLocaleString("es-AR") : "Monto insuficiente";
+
+                cuotasDiv.innerHTML="";
+                let textoWA = `*Simulación Crédito Prendario*%0A%0AMonto: $${monto.toLocaleString("es-AR")}%0A%0A`;
+
+                for(let m in COEF){
+                    const cuota = Math.round(monto*COEF[m]/1000);
+                    const total = cuota*m;
+
+                    cuotasDiv.innerHTML += `
+                    <div class="card card-cuota">
+                        <div class="meses">${m} meses</div>
+                        <div class="cuota">$${cuota.toLocaleString("es-AR")}</div>
+                        <div class="total">Total: $${total.toLocaleString("es-AR")}</div>
+                    </div>
+                    `;
+
+                    textoWA += `${m} meses: $${cuota.toLocaleString("es-AR")}%0A`;
+                }
+
+                btnWhatsApp.onclick = ()=>{
+                    window.open(`https://wa.me/${TEL}?text=${textoWA}`);
+                };
+            }
+
+            /* ====== EVENTOS ====== */
+            valorVehiculo.addEventListener("input",calcularPrestamo);
+            anioVehiculo.addEventListener("change",calcularPrestamo);
+            montoFinanciar.addEventListener("input",calcularTodo);
+
+            window.addEventListener("load",()=>{
+                calcularPrestamo();
+                calcularTodo();
+            });
+        </script>
+
+    </body>
+</html>
