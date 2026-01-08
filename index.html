@@ -382,32 +382,10 @@
                         <div id="textoPorcentaje"></div>
                     </div>
 
-                    <!-- <div class="porcentajes-box">
-                        <h3>Porcentajes según antigüedad</h3>
-                        <ul>
-                            <div>0 KM a 1 año → <strong>80%</strong></div>
-                            <div>2 a 5 años → <strong>70%</strong></div>
-                            <div>6 a 10 años → <strong>60%</strong></div>
-                            <div>11 a 13 años → <strong>50%</strong></div>
-                        </ul>
-                    </div> -->
-
                     <div class="porcentajes-simple">
                         <div class="porcentajes-titulo">
                             PORCENTAJE DE FINANCIACIÓN SEGÚN ANTIGUEDAD DEL VEHÍCULO:
                         </div>
-                        <!-- <div class="porcentajes-linea"> 
-                            0–1 año: <strong>80%</strong> |
-                            2–5 años: <strong>70%</strong> |
-                            6–10 años: <strong>60%</strong> |
-                            11–13 años: <strong>50%</strong>
-                        </div> -->
-                        <!-- <div class="porcentajes-linea"> 
-                            2025-2026: <strong>80% de su valor</strong>
-                            2021-2024: <strong>70% de su valor</strong>
-                            2016–2020: <strong>60% de su valor</strong>
-                            2013-2015: <strong>50% de su valor</strong>
-                        </div> -->
                         <div class="porcentajes-linea"> 
                             <label class="porcentajes-años">2025-2026: 80% de su valor</label>
                             <label class="porcentajes-años">2021-2024: 70% de su valor</label>
@@ -415,19 +393,6 @@
                             <label class="porcentajes-años">2013-2015: 50% de su valor</label>
                         </div>
                     </div>
-
-
-
-
-                    <!-- <div class="band-dark">
-                        <div>PORCENTAJE DE FINANCIACIÓN:</div>
-                        <div id="porcentajes-footer" class="porcentajes">
-                            <div>2025-2020: 70% de su valor</div>
-                            <div>2019-2015: 65% de su valor</div>
-                            <div>2014-2012: 55% de su valor</div>
-                            <div>2011-2010: 50% de su valor</div>
-                        </div>
-                    </div> -->
 
                 </div>
             </header>
@@ -476,36 +441,6 @@
                 <h2 class="prestamo-UVA" id="prestamoUVA">Préstamo Línea UVA</h2>
 
                 <div class="uva-box">
-                    <!-- <h3>Línea UVA</h3> -->
-
-                    <!-- <table class="uva-table">
-                        <thead>
-                            <tr>
-                                <th>Plazo</th>
-                                <th>24</th>
-                                <th>36</th>
-                                <th>48</th>
-                                <th>60</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="filaUVA">
-                                <td>1° cuota c/ $1000</td>
-                                <td>$65,35</td>
-                                <td>$52,10</td>
-                                <td>$45,88</td>
-                                <td>$42,43</td>
-                            </tr>
-                            <tr id="filaUVAValores">
-                                <td>Cuota estimada</td>
-                                <td id="uva24">—</td>
-                                <td id="uva36">—</td>
-                                <td id="uva48">—</td>
-                                <td id="uva60">—</td>
-                            </tr>
-
-                        </tbody>
-                    </table> -->
 
                     <div class="uva-cards-grid" id="uvaCards">
                         <div class="card card-cuota uva-card" data-plazo="24">
@@ -533,13 +468,10 @@
                         </div>
                     </div>
 
-
                     <div id="uvaMensaje" class="uva-msg">
                         Consulta a nuestro WhatsApp otras opciones para línea UVA
                     </div>
                 </div>
-
-
 
                 <button class="whatsapp-btn" id="btnWhatsApp">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
@@ -547,10 +479,6 @@
                 </button>
 
                 <h1 class="mensaje-consulta">Consultar adjuntando fotos del DNI y título del vehículo</h1>
-
-                <!-- <p style="margin-top:20px;font-size:1.1rem">
-                    📞 Consultas: 3571-XXXXXX | 351-XXXXXX    <! -- Modificar -- >
-                </p> -->
 
                 <h2>Consultas y Asesores</h2>
 
@@ -648,6 +576,9 @@
                 const monto = +montoFinanciar.value || 0;
                 // const neto = monto - GASTOS;
                 const provincia = document.getElementById("provincia").value;
+                const provinciaSelect = document.getElementById("provincia");
+                const provinciaValor = provinciaSelect.value;
+                const provinciaTexto = provinciaSelect.options[provinciaSelect.selectedIndex].text;
                 const gastos = GASTOS_POR_PROVINCIA[provincia];
                 const neto = monto - gastos;
 
@@ -659,7 +590,14 @@
 
 
                 cuotasDiv.innerHTML="";
-                let textoWA = `*Simulación Crédito Prendario*%0A%0AMonto: $${monto.toLocaleString("es-AR")}%0A%0A`;
+                // let textoWA = `*Simulación Crédito Prendario*%0A%0AMonto: $${monto.toLocaleString("es-AR")}%0A%0A`;
+                let textoWA = 
+                `*Simulación Crédito Prendario*%0A%0A` +
+                `Provincia: ${provinciaTexto}%0A%0A` +
+                `Monto solicitado: $${monto.toLocaleString("es-AR")}%0A` +
+                `Gastos MAUDAM: $${gastos.toLocaleString("es-AR")}%0A` +
+                `Neto a percibir (Agencia): $${neto.toLocaleString("es-AR")}%0A%0A` +
+                `*Cuotas tradicionales:*%0A`;
 
                 for(let m in COEF){
                     const cuota = Math.round(monto*COEF[m]/1000);
@@ -674,8 +612,18 @@
                     </div>
                     `;
 
-                    textoWA += `${m} meses: $${cuota.toLocaleString("es-AR")}%0A`;
+                    // textoWA += `${m} meses: $${cuota.toLocaleString("es-AR")}%0A`;
+                    textoWA += `${m} meses → $${cuota.toLocaleString("es-AR")} | Total: $${total.toLocaleString("es-AR")}%0A`;
+
                 }
+
+                textoWA += `%0A*Cuotas UVA (estimadas):*%0A`;
+                for(let plazo in COEF_UVA){
+                    const cuotaUVA = Math.round((monto / 1000) * COEF_UVA[plazo]);
+                    textoWA += 
+                        `${plazo} meses → $${cuotaUVA.toLocaleString("es-AR")}%0A`;
+                }
+                textoWA += `%0AQuiero más información sobre este crédito.`;
 
                 btnWhatsApp.onclick = ()=>{
                     window.open(`https://wa.me/${TEL}?text=${textoWA}`);
@@ -696,23 +644,6 @@
                 }
             }
 
-            //function actualizarUVA(anio){
-            //    const fila = document.getElementById("filaUVA");
-            //    const msg = document.getElementById("uvaMensaje");
-            //    const filaValores = document.getElementById("filaUVAValores");
-
-            //    if(anio >= 2021){
-            //        fila.classList.add("uva-activa");
-            //        filaValores.style.display = "table-row";
-            //        msg.style.display = "none";
-            //        calcularUVA();
-            //    }else{
-            //        fila.classList.remove("uva-activa");
-            //        filaValores.style.display = "none";
-            //        msg.style.display = "block";
-            //    }
-            //}
-
             function actualizarUVA(anio){
                 const msg = document.getElementById("uvaMensaje");
                 const cards = document.querySelectorAll(".uva-card");
@@ -726,9 +657,6 @@
                     msg.style.display = "block";
                 }
             }
-
-
-
 
             /* ====== EVENTOS ====== */
             // valorVehiculo.addEventListener("input",calcularPrestamo);
