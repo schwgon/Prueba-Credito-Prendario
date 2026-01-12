@@ -255,6 +255,87 @@
                 font-weight:bold;
             }
 
+            /* ====== SELECTOR TIPO DE PRÉSTAMO ====== */
+            .selector-prestamo {
+                margin-top: 40px;
+                text-align: center;
+            }
+
+            /*.selector-titulo {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+                color: #0f172a;
+            }*/
+            .selector-header {
+                margin-bottom: 22px;
+            }
+
+            .selector-titulo {
+                font-size: 1.5rem;
+                font-weight: 800;
+                color: #0f172a;
+                margin-bottom: 6px;
+            }
+
+            .selector-subtitulo {
+                font-size: 0.95rem;
+                color: #64748b;
+            }
+
+
+            .selector-opciones {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 20px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .opcion-prestamo {
+                cursor: pointer;
+            }
+
+            .opcion-prestamo input {
+                display: none;
+            }
+
+            .opcion-contenido {
+                border: 2px solid #e2e8f0;
+                border-radius: 16px;
+                padding: 20px;
+                background: #f8fafc;
+                transition: all 0.25s ease;
+                text-align: left;
+            }
+
+            .opcion-titulo {
+                font-size: 1.15rem;
+                font-weight: 700;
+                color: #0f172a;
+                display: block;
+            }
+
+            .opcion-desc {
+                font-size: 0.95rem;
+                color: #64748b;
+                margin-top: 4px;
+                display: block;
+            }
+
+            /* Estado seleccionado */
+            .opcion-prestamo input:checked + .opcion-contenido {
+                border-color: #22c55e;
+                background: #ecfdf5;
+                box-shadow: 0 10px 25px rgba(34,197,94,0.25);
+            }
+
+            /* Hover */
+            .opcion-prestamo:hover .opcion-contenido {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            }
+
+
             /* ====== WHATSAPP ====== */
             .whatsapp-btn{
                 margin:40px auto;
@@ -415,8 +496,6 @@
                     * Los gastos administrativos varían según la provincia
                 </p>
 
-
-
                 <div class="cards-grid">
                     <div class="card">
                         <h3>Monto solicitado</h3>
@@ -473,6 +552,35 @@
                     </div>
                 </div>
 
+                <div id="selectorPrestamo" class="selector-prestamo">
+                    <!-- <h3 class="selector-titulo">Tipo de préstamo</h3> -->
+                     <div class="selector-header">
+                        <h3 class="selector-titulo">Elegí el tipo de crédito</h3>
+                        <p class="selector-subtitulo">
+                            Seleccioná la modalidad que mejor se adapte a tus necesidades financieras
+                        </p>
+                    </div>
+
+                    <div class="selector-opciones">
+                        <label class="opcion-prestamo">
+                            <input type="radio" name="tipoPrestamo" value="Tradicional" checked>
+                            <div class="opcion-contenido">
+                                <span class="opcion-titulo">Préstamo Tradicional</span>
+                                <span class="opcion-desc">Cuotas fijas en pesos</span>
+                            </div>
+                        </label>
+
+                        <label class="opcion-prestamo">
+                            <input type="radio" name="tipoPrestamo" value="UVA">
+                            <div class="opcion-contenido">
+                                <span class="opcion-titulo">Préstamo Línea UVA</span>
+                                <span class="opcion-desc">Cuotas ajustadas por inflación</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+
                 <button class="whatsapp-btn" id="btnWhatsApp">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
                     Enviar por WhatsApp
@@ -485,28 +593,28 @@
                 <div class="contactos-grid">
                     <div class="contacto-card">
                         <h4>Mauro Bono</h4>
-                        <a href="https://wa.me/5493571311850" target="_blank">
+                        <a href="#" onclick="enviarWhatsApp('5493571311850')" target="_blank">
                             📱 3571-311850
                         </a>
                     </div>
 
                     <div class="contacto-card">
                         <h4>Damian Fernandez</h4>
-                        <a href="https://wa.me/5493571311861" target="_blank">
+                        <a href="#" onclick="enviarWhatsApp('5493571311861')" target="_blank">
                             📱 3571-311861
                         </a>
                     </div>
 
                     <div class="contacto-card">
                         <h4>Violeta Muñoz</h4>
-                        <a href="https://wa.me/5493571311924" target="_blank">
+                        <a href="#" onclick="enviarWhatsApp('5493571311924')" target="_blank">
                             📱 3571-311924
                         </a>
                     </div>
 
                     <div class="contacto-card">
                         <h4>Cecilia Medina</h4>
-                        <a href="https://wa.me/5493571311891" target="_blank">
+                        <a href="#" onclick="enviarWhatsApp('5493571311891')" target="_blank">
                             📱 3571-311891
                         </a>
                     </div>
@@ -528,7 +636,13 @@
             };
 
             // const COEF = {12:131.880, 24:87.585, 36:75.916, 48:71.108, 60:68.857};
-            const COEF = {12:126.87, 24:82.21, 36:70.11, 48:64.95, 60:62.42};
+            const COEF = {
+                12:126.87, 
+                24:82.21, 
+                36:70.11, 
+                48:64.95, 
+                60:62.42
+            };
             const TEL = "5493571311891";
             const COEF_UVA = {
                 24: 65.35,
@@ -574,13 +688,15 @@
 
             function calcularTodo(){
                 const monto = +montoFinanciar.value || 0;
-                // const neto = monto - GASTOS;
                 const provincia = document.getElementById("provincia").value;
                 const provinciaSelect = document.getElementById("provincia");
                 const provinciaValor = provinciaSelect.value;
                 const provinciaTexto = provinciaSelect.options[provinciaSelect.selectedIndex].text;
                 const gastos = GASTOS_POR_PROVINCIA[provincia];
                 const neto = monto - gastos;
+                const anio = +anioVehiculo.value;
+                const tipoPrestamo = document.querySelector('input[name="tipoPrestamo"]:checked')?.value || "Tradicional";
+
 
 
                 mostrarMonto.textContent = "$"+monto.toLocaleString("es-AR");
@@ -591,12 +707,15 @@
 
                 cuotasDiv.innerHTML="";
                 // let textoWA = `*Simulación Crédito Prendario*%0A%0AMonto: $${monto.toLocaleString("es-AR")}%0A%0A`;
-                let textoWA = 
+                
+                // let textoWA =
+                window.textoWA = 
                 `*Simulación Crédito Prendario*%0A%0A` +
                 `Provincia: ${provinciaTexto}%0A%0A` +
                 `Monto solicitado: $${monto.toLocaleString("es-AR")}%0A` +
                 `Gastos MAUDAM: $${gastos.toLocaleString("es-AR")}%0A` +
                 `Neto a percibir (Agencia): $${neto.toLocaleString("es-AR")}%0A%0A` +
+                `%0A*Tipo de préstamo elegido:* ${tipoPrestamo}%0A` +
                 `*Cuotas tradicionales:*%0A`;
 
                 for(let m in COEF){
@@ -616,17 +735,19 @@
                     textoWA += `${m} meses → $${cuota.toLocaleString("es-AR")} | Total: $${total.toLocaleString("es-AR")}%0A`;
 
                 }
-
-                textoWA += `%0A*Cuotas UVA (estimadas):*%0A`;
-                for(let plazo in COEF_UVA){
-                    const cuotaUVA = Math.round((monto / 1000) * COEF_UVA[plazo]);
-                    textoWA += 
-                        `${plazo} meses → $${cuotaUVA.toLocaleString("es-AR")}%0A`;
+                if (anio >= 2021) {
+                    textoWA += `%0A*Cuotas UVA (estimadas):*%0A`;
+                    for(let plazo in COEF_UVA){
+                        const cuotaUVA = Math.round((monto / 1000) * COEF_UVA[plazo]);
+                        textoWA += `${plazo} meses → $${cuotaUVA.toLocaleString("es-AR")}%0A`;
+                    }
                 }
+
                 textoWA += `%0AQuiero más información sobre este crédito.`;
 
                 btnWhatsApp.onclick = ()=>{
-                    window.open(`https://wa.me/${TEL}?text=${textoWA}`);
+                    // window.open(`https://wa.me/${TEL}?text=${textoWA}`);
+                    enviarWhatsApp(TEL);
                 };
                 document.getElementById("provincia").addEventListener("change", calcularTodo);
                 calcularUVA();
@@ -647,15 +768,32 @@
             function actualizarUVA(anio){
                 const msg = document.getElementById("uvaMensaje");
                 const cards = document.querySelectorAll(".uva-card");
+                const selector = document.getElementById("selectorPrestamo");
 
                 if(anio >= 2021){
+                    // UVA ACTIVO
                     cards.forEach(card => card.classList.remove("inactiva"));
                     msg.style.display = "none";
+                    selector.style.display = "block";
+
                     calcularUVA();
                 }else{
+                    // UVA NO DISPONIBLE
                     cards.forEach(card => card.classList.add("inactiva"));
                     msg.style.display = "block";
+                    selector.style.display = "none";
+
+                    // 👉 Mostrar $0 en todas las cuotas UVA
+                    for (let plazo in COEF_UVA) {
+                        const el = document.getElementById("uva" + plazo);
+                        if (el) el.textContent = "$0";
+                    }
                 }
+            }
+
+            function enviarWhatsApp(numero) {
+                if (!window.textoWA) return;
+                window.open(`https://wa.me/${numero}?text=${window.textoWA}`);
             }
 
             /* ====== EVENTOS ====== */
