@@ -25,22 +25,9 @@
                 border-radius:24px;
                 overflow:hidden;
                 box-shadow:0 30px 100px rgba(0,0,0,.4);
-                /*position:relative;*/
             }
-            /*.container::before{
-                content:"";
-                position:absolute;
-                inset:0;
-                background:url("IMAGEN.png") center/500px no-repeat;
-                opacity:0.06;
-                pointer-events:none;
-            }*/
 
             header{
-                /* background:linear-gradient(135deg,#84c8b2,#64b28a); */
-                /* background:linear-gradient(135deg,#39936b,#39936b); */
-                /* background:linear-gradient(135deg,#37ab77,#37ab77); */
-                /* background:linear-gradient(135deg,#256548,#37ab77); */
                 background:linear-gradient(135deg,#256548,#37ab77);
                 padding:40px 20px;
                 text-align:center;
@@ -54,12 +41,6 @@
                 height:300px;
                 margin-bottom:15px;
                 text-align: right;
-
-                /* position: absolute;
-                top: 30px;
-                left: 150px;
-                height: 130px;
-                z-index: 9999; */
             }
 
             /* ====== SIMULADOR VEHÍCULO ====== */
@@ -88,24 +69,7 @@
                 color:#dc2626;
                 font-weight:bold;
             }
-            /*.porcentajes-box{
-                background:#256548;
-                color:#fff;
-                padding:20px;
-                border-radius:16px;
-                margin-top:20px;
-            }*/
-            /*.band-dark{
-                text-align: left;
-            }*/
-            /*.porcentajes{
-                display: flex;
-                gap: 24px;
-                flex-wrap: wrap;
-                font-weight: 600;
-            }*/
             .porcentajes-simple{
-                /*background:#0f172a;*/
                 background:#2e2e2e;
                 color:#ffffff;
                 padding:14px 20px;
@@ -113,17 +77,7 @@
                 margin-top:30px;
                 max-width:1050px;
                 text-align: left;
-                
             }
-            /*.porcentajes-titulo{
-                font-size:0.95rem;
-                font-weight:600;
-                margin-bottom:6px;
-            }
-            .porcentajes-linea{
-                font-size:0.9rem;
-                opacity:.9;
-            }*/
             .porcentajes-titulo{
                 font-size:0.95rem;
                 font-weight:60;
@@ -140,11 +94,6 @@
                 padding: 0px 15px;
                 display: inline-block;
             }
-
-            /*.porcentajes-linea strong{
-                color:#72a091;
-            }*/
-
 
             /* ====== CALCULADORA ====== */
             .calc-section{
@@ -203,10 +152,6 @@
                 border-radius:20px;
                 display:inline-block;
             }
-            /*.cards-grid{
-                display:grid;
-                grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            }*/
             .cuotas-grid{
                 display:grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -223,7 +168,6 @@
                 display:inline-block;
             }
 
-
             /* ====== UVA ====== */
             .uva-cards-grid{
                 display:grid;
@@ -238,13 +182,10 @@
                 transform: translateY(-4px);
                 box-shadow:0 15px 30px rgba(0,0,0,.15);
             }
-
-            /* Estado NO disponible */
             .uva-card.inactiva{
                 opacity:.45;
                 filter: grayscale(1);
             }
-
             .uva-msg{
                 display:none;
                 margin-top:18px;
@@ -260,29 +201,19 @@
                 margin-top: 40px;
                 text-align: center;
             }
-
-            /*.selector-titulo {
-                font-size: 1.4rem;
-                margin-bottom: 20px;
-                color: #0f172a;
-            }*/
             .selector-header {
                 margin-bottom: 22px;
             }
-
             .selector-titulo {
                 font-size: 1.5rem;
                 font-weight: 800;
                 color: #0f172a;
                 margin-bottom: 6px;
             }
-
             .selector-subtitulo {
                 font-size: 0.95rem;
                 color: #64748b;
             }
-
-
             .selector-opciones {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -290,15 +221,12 @@
                 max-width: 600px;
                 margin: 0 auto;
             }
-
             .opcion-prestamo {
                 cursor: pointer;
             }
-
             .opcion-prestamo input {
                 display: none;
             }
-
             .opcion-contenido {
                 border: 2px solid #e2e8f0;
                 border-radius: 16px;
@@ -307,34 +235,27 @@
                 transition: all 0.25s ease;
                 text-align: left;
             }
-
             .opcion-titulo {
                 font-size: 1.15rem;
                 font-weight: 700;
                 color: #0f172a;
                 display: block;
             }
-
             .opcion-desc {
                 font-size: 0.95rem;
                 color: #64748b;
                 margin-top: 4px;
                 display: block;
             }
-
-            /* Estado seleccionado */
             .opcion-prestamo input:checked + .opcion-contenido {
                 border-color: #22c55e;
                 background: #ecfdf5;
                 box-shadow: 0 10px 25px rgba(34,197,94,0.25);
             }
-
-            /* Hover */
             .opcion-prestamo:hover .opcion-contenido {
                 transform: translateY(-3px);
                 box-shadow: 0 12px 30px rgba(0,0,0,0.12);
             }
-
 
             /* ====== WHATSAPP ====== */
             .whatsapp-btn{
@@ -343,15 +264,15 @@
                 background:#25d366;
                 color:#fff;
                 font-size:1.4rem;
-                font-weight: bold; /* innecesario */
+                font-weight: bold;
                 border:none;
                 border-radius:50px;
                 cursor:pointer;
                 display:flex;
                 align-items:center;
-                justify-content: center; /* innecesario */
+                justify-content: center;
                 gap:15px;
-                max-width: 400px; /* innecesario */
+                max-width: 400px;
                 box-shadow:0 10px 30px rgba(37,211,102,.4);
                 transition: all 0.3s;
             }
@@ -553,7 +474,6 @@
                 </div>
 
                 <div id="selectorPrestamo" class="selector-prestamo">
-                    <!-- <h3 class="selector-titulo">Tipo de préstamo</h3> -->
                      <div class="selector-header">
                         <h3 class="selector-titulo">Elegí el tipo de crédito</h3>
                         <p class="selector-subtitulo">
@@ -629,27 +549,13 @@
 
         <script>
             /* ====== CONSTANTES ====== */
-            // const GASTOS = 500000;
             const GASTOS_POR_PROVINCIA = {
                 cordoba: 500000,
                 santiago: 530000
             };
-
-            // const COEF = {12:131.880, 24:87.585, 36:75.916, 48:71.108, 60:68.857};
-            const COEF = {
-                12:126.87, 
-                24:82.21, 
-                36:70.11, 
-                48:64.95, 
-                60:62.42
-            };
+            const COEF = {12:126.87, 24:82.21, 36:70.11, 48:64.95, 60:62.42};
             const TEL = "5493571311891";
-            const COEF_UVA = {
-                24: 65.35,
-                36: 52.10,
-                48: 45.88,
-                60: 42.43
-            };
+            const COEF_UVA = {24: 65.35, 36: 52.10, 48: 45.88, 60: 42.43};
 
 
             /* ====== ELEMENTOS ====== */
@@ -680,7 +586,7 @@
                 montoMaximo.textContent = "$"+max.toLocaleString("es-AR");
                 textoPorcentaje.textContent = txt;
 
-                // 👉 setear automáticamente el input
+                // setear automáticamente el input
                 montoFinanciar.value = max;
                 calcularTodo();
                 actualizarUVA(anio);
@@ -695,27 +601,19 @@
                 const gastos = GASTOS_POR_PROVINCIA[provincia];
                 const neto = monto - gastos;
                 const anio = +anioVehiculo.value;
-                const tipoPrestamo = document.querySelector('input[name="tipoPrestamo"]:checked')?.value || "Tradicional";
-
-
-
+                
                 mostrarMonto.textContent = "$"+monto.toLocaleString("es-AR");
                 mostrarNeto.textContent = neto>0 ? "$"+neto.toLocaleString("es-AR") : "Monto insuficiente";
 
                 document.querySelector(".card:nth-child(2) .valor").textContent ="$" + gastos.toLocaleString("es-AR");
 
-
                 cuotasDiv.innerHTML="";
-                // let textoWA = `*Simulación Crédito Prendario*%0A%0AMonto: $${monto.toLocaleString("es-AR")}%0A%0A`;
-                
-                // let textoWA =
                 window.textoWA = 
                 `*Simulación Crédito Prendario*%0A%0A` +
                 `Provincia: ${provinciaTexto}%0A%0A` +
                 `Monto solicitado: $${monto.toLocaleString("es-AR")}%0A` +
                 `Gastos MAUDAM: $${gastos.toLocaleString("es-AR")}%0A` +
                 `Neto a percibir (Agencia): $${neto.toLocaleString("es-AR")}%0A%0A` +
-                `%0A*Tipo de préstamo elegido:* ${tipoPrestamo}%0A` +
                 `*Cuotas tradicionales:*%0A`;
 
                 for(let m in COEF){
@@ -730,8 +628,6 @@
                         <div class="coef">Coeficiente: ${COEF[m]}</div>
                     </div>
                     `;
-
-                    // textoWA += `${m} meses: $${cuota.toLocaleString("es-AR")}%0A`;
                     textoWA += `${m} meses → $${cuota.toLocaleString("es-AR")} | Total: $${total.toLocaleString("es-AR")}%0A`;
 
                 }
@@ -745,11 +641,9 @@
 
                 textoWA += `%0AQuiero más información sobre este crédito.`;
 
-                btnWhatsApp.onclick = ()=>{
-                    // window.open(`https://wa.me/${TEL}?text=${textoWA}`);
-                    enviarWhatsApp(TEL);
-                };
+                btnWhatsApp.addEventListener("click", () => enviarWhatsApp(TEL));
                 document.getElementById("provincia").addEventListener("change", calcularTodo);
+
                 calcularUVA();
             }
 
@@ -793,27 +687,33 @@
 
             function enviarWhatsApp(numero) {
                 if (!window.textoWA) return;
-                window.open(`https://wa.me/${numero}?text=${window.textoWA}`);
+
+                const tipoPrestamo =
+                    document.querySelector('input[name="tipoPrestamo"]:checked')?.value
+                    || "Tradicional";
+
+                const textoFinal =
+                    window.textoWA.replace(
+                        /(\*Cuotas tradicionales:\*)/,
+                        `*Tipo de préstamo elegido:* ${tipoPrestamo}%0A%0A$1`
+                    );
+
+                window.open(`https://wa.me/${numero}?text=${textoFinal}`);
             }
 
-            /* ====== EVENTOS ====== */
-            // valorVehiculo.addEventListener("input",calcularPrestamo);
-            valorVehiculo.addEventListener("input", () => {
-                valorVehiculo.value = valorVehiculo.value
-                    .replace(/\D/g, "")   // solo números
-                    .slice(0, 10);        // máximo 10 dígitos
+            function soloNumeros(input, max = 10) {
+                input.value = input.value.replace(/\D/g, "").slice(0, max);
+            }
 
+
+            /* ====== EVENTOS ====== */
+            valorVehiculo.addEventListener("input", () => {
+                soloNumeros(valorVehiculo);
                 calcularPrestamo();
             });
-
             anioVehiculo.addEventListener("change",calcularPrestamo);
-
-            // montoFinanciar.addEventListener("input",calcularTodo);
             montoFinanciar.addEventListener("input", () => {
-                montoFinanciar.value = montoFinanciar.value
-                    .replace(/\D/g, "")     // solo números
-                    .slice(0, 10);          // máximo 10 dígitos
-
+                soloNumeros(montoFinanciar);
                 calcularTodo();
             });
 
