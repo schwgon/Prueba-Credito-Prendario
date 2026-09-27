@@ -403,7 +403,7 @@
                     <div class="inputs">
                         <div>
                             <label>Valor INFO del vehículo ($)</label>
-                            <input type="number" id="valorVehiculo" value="15000000">
+                            <input type="text" id="valorVehiculo" value="15.000.000" inputmode="numeric">
                         </div>
                         <div>
                             <label>Año del vehículo</label>
@@ -468,7 +468,7 @@
             <section class="calc-section">
                 <h2>Calculadora de Crédito</h2>
 
-                <input type="number" id="montoFinanciar" class="input-monto" value="8000000">
+                <input type="text" id="montoFinanciar" class="input-monto" value="8.000.000" inputmode="numeric">
 
                 <h2 class="prestamo-tradicional" id="prestamoTradicional">Préstamo Tradicional</h2>
 
@@ -638,7 +638,7 @@
 
             /* ====== FUNCIONES ====== */
             function calcularPrestamo(){
-                const valor = +valorVehiculo.value || 0;
+                const valor = obtenerNumero(valorVehiculo);
                 const anio = +anioVehiculo.value;
 
                 /* ===== TRADICIONAL ===== */
@@ -688,7 +688,7 @@
             }
 
             function calcularTodo(){
-                const monto = +montoFinanciar.value || 0;
+                const monto = obtenerNumero(montoFinanciar);
                 const provincia = document.getElementById("provincia").value;
                 const provinciaSelect = document.getElementById("provincia");
                 const provinciaValor = provinciaSelect.value;
@@ -800,6 +800,23 @@
                 input.value = input.value.replace(/\D/g, "").slice(0, max);
             }
 
+            function formatearPesos(input) {
+                let valor = input.value.replace(/\D/g, "");
+            
+                if (!valor) {
+                    input.value = "";
+                    return;
+                }
+            
+                input.value = Number(valor).toLocaleString("es-AR");
+            }
+            
+            function obtenerNumero(input) {
+                return Number(
+                    input.value.replace(/\./g, "").replace(/[^\d]/g, "")
+                ) || 0;
+            }
+
 
             /* ====== EVENTOS ====== */
             valorVehiculo.addEventListener("input", () => {
@@ -814,6 +831,16 @@
 
             window.addEventListener("load",()=>{
                 calcularPrestamo();
+                calcularTodo();
+            });
+
+            valorVehiculo.addEventListener("input", () => {
+                formatearPesos(valorVehiculo);
+                calcularPrestamo();
+            });
+            
+            montoFinanciar.addEventListener("input", () => {
+                formatearPesos(montoFinanciar);
                 calcularTodo();
             });
         </script>
