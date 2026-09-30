@@ -743,7 +743,7 @@
                 calcularUVA();
             }
 
-            function calcularUVA(){
+            /*function calcularUVA(){
                 const monto = +montoFinanciar.value || 0;
 
                 if(monto <= 0) return;
@@ -752,6 +752,24 @@
                     const cuota = Math.round((monto / 1000) * COEF_UVA[plazo]);
                     document.getElementById("uva" + plazo).textContent =
                         "$" + cuota.toLocaleString("es-AR");
+                }
+            }*/
+
+            function calcularUVA(){
+                const monto = obtenerNumero(montoFinanciar);
+            
+                if(monto <= 0){
+                    for(let plazo in COEF_UVA){
+                        const el = document.getElementById("uva" + plazo);
+                        if(el) el.textContent = "$0";
+                    }
+                    return;
+                }
+                for(let plazo in COEF_UVA){
+                    const cuota = Math.round(
+                        (monto / 1000) * COEF_UVA[plazo]
+                    );
+                    document.getElementById("uva" + plazo).textContent = "$" + cuota.toLocaleString("es-AR");
                 }
             }
 
@@ -820,15 +838,15 @@
 
 
             /* ====== EVENTOS ====== */
-            valorVehiculo.addEventListener("input", () => {
+            /*valorVehiculo.addEventListener("input", () => {
                 soloNumeros(valorVehiculo);
                 calcularPrestamo();
-            });
+            });*/
             anioVehiculo.addEventListener("change",calcularPrestamo);
-            montoFinanciar.addEventListener("input", () => {
+            /*montoFinanciar.addEventListener("input", () => {
                 soloNumeros(montoFinanciar);
                 calcularTodo();
-            });
+            });*/
 
             window.addEventListener("load",()=>{
                 calcularPrestamo();
