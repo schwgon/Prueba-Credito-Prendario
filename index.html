@@ -530,25 +530,21 @@
                         <div class="card card-cuota uva-card" data-plazo="24">
                             <div class="meses">24 meses</div>
                             <div class="cuota" id="uva24">—</div>
-                            <div class="coef">Coeficiente: $55,06065 </div>
                         </div>
 
                         <div class="card card-cuota uva-card" data-plazo="36">
                             <div class="meses">36 meses</div>
                             <div class="cuota" id="uva36">—</div>
-                            <div class="coef">Coeficiente: $41,35006 </div>
                         </div>
 
                         <div class="card card-cuota uva-card" data-plazo="48">
                             <div class="meses">48 meses</div>
                             <div class="cuota" id="uva48">—</div>
-                            <div class="coef">Coeficiente: $34,64069 </div>
                         </div>
 
                         <div class="card card-cuota uva-card" data-plazo="60">
                             <div class="meses">60 meses</div>
                             <div class="cuota" id="uva60">—</div>
-                            <div class="coef">Coeficiente: $30,72835 </div>
                         </div>
                     </div>
 
@@ -730,17 +726,14 @@
 
                 for(let m in COEF){
                     const cuota = Math.round(monto*COEF[m]/1000);
-                    const total = cuota*m;
 
                     cuotasDiv.innerHTML += `
                     <div class="card card-cuota">
                         <div class="meses">${m} meses</div>
                         <div class="cuota">$${cuota.toLocaleString("es-AR")}</div>
-                        <div class="total">Total: $${total.toLocaleString("es-AR")}</div>
-                        <div class="coef">Coeficiente: ${COEF[m]}</div>
                     </div>
                     `;
-                    textoWA += `${m} meses → $${cuota.toLocaleString("es-AR")} | Total: $${total.toLocaleString("es-AR")}%0A`;
+                    textoWA += `${m} meses → $${cuota.toLocaleString("es-AR")}%0A`;
 
                 }
                 if (anio >= 2021) {
