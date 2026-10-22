@@ -10,6 +10,7 @@
 
         <style>
             /* ====== ESTILOS GENERALES ====== */
+            *, *::before, *::after { box-sizing: border-box; }
             body{
                 margin:0;
                 font-family:'Segoe UI',sans-serif;
@@ -155,6 +156,8 @@
             .calc-section{
                 padding:40px 20px;
                 text-align:center;
+                min-width:0;
+                width:100%;
             }
             .input-monto{
                 width:80%;
@@ -167,9 +170,11 @@
             }
             .cards-grid{
                 display:grid;
-                grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+                grid-template-columns:repeat(2, minmax(0, 1fr));
                 gap:20px;
                 margin-top:30px;
+                width:100%;
+                min-width:0;
             }
             .card{
                 background:#1e293b;
@@ -177,6 +182,9 @@
                 padding:25px;
                 border-radius:16px;
                 box-shadow:0 10px 25px rgba(0,0,0,.3);
+                min-width:0;
+                max-width:100%;
+                overflow-wrap:anywhere;
             }
             .card h3{margin-bottom:10px;color:#cbd5e1}
             .valor{font-size:2rem;font-weight:bold;color:#fbbf24}
@@ -210,26 +218,34 @@
             }
             .cuotas-grid{
                 display:grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns:repeat(3, minmax(0, 1fr));
                 gap:20px;
                 margin-top:30px;
+                width:100%;
+                min-width:0;
             }
             .info-ofertas{
-                margin-top:50px;
+                margin:50px 0 0;
                 font-size:1.1rem;
                 color:#475569;
                 background:#e7f4ec;
                 padding:14px 20px;
                 border-radius:14px;
-                display:inline-block;
+                display:block;
+                width:100%;
+                max-width:100%;
+                min-width:0;
+                overflow-wrap:anywhere;
             }
 
             /* ====== UVA ====== */
             .uva-cards-grid{
                 display:grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns:repeat(2, minmax(0, 1fr));
                 gap:20px;
                 margin-top:20px;
+                width:100%;
+                min-width:0;
             }
             .uva-card{
                 transition: transform .2s, box-shadow .2s;
@@ -381,12 +397,18 @@
 
             /* ====== MOBILE ====== */
             @media(max-width:768px){
-                .inputs{grid-template-columns:1fr}
-                .cuotas-grid{grid-template-columns: 1fr;}
-                .logo{height:200px; /* margin-bottom:15px; text-align: right; */}
-                .uva-cards-grid{grid-template-columns: repeat(1, 1fr);}
-                .mensaje-consulta{font-size: 30px;}
-                .porcentajes-años{display: block; /* padding: 4px 15px; */}
+                body{padding:10px 6px;}
+                .container{width:100%;border-radius:16px;}
+                .inputs{grid-template-columns:minmax(0,1fr)}
+                .resultado-box{grid-template-columns:minmax(0,1fr)}
+                .cards-grid{grid-template-columns:minmax(0,1fr)}
+                .cuotas-grid{grid-template-columns:minmax(0,1fr)}
+                .logo{height:200px;max-width:100%;object-fit:contain;}
+                .uva-cards-grid{grid-template-columns:minmax(0,1fr)}
+                .mensaje-consulta{font-size:30px;overflow-wrap:anywhere;}
+                .porcentajes-años{display:block;}
+                .info-ofertas{font-size:1rem;padding:14px;}
+                .card,.monto-card{min-width:0;}
             }
         </style>
     </head>
@@ -487,10 +509,6 @@
                     <div class="card">
                         <h3>Monto solicitado</h3>
                         <p class="valor" id="mostrarMonto">$0</p>
-                    </div>
-                    <div class="card">
-                        <h3>Gastos MAUDAM</h3>
-                        <p class="valor">$500.000</p>
                     </div>
                     <div class="card">
                         <h3>Neto a percibir (AGENCIA)</h3>
@@ -701,8 +719,6 @@
                 mostrarMonto.textContent = "$"+monto.toLocaleString("es-AR");
                 mostrarNeto.textContent = neto>0 ? "$"+neto.toLocaleString("es-AR") : "Monto insuficiente";
 
-                document.querySelector(".card:nth-child(2) .valor").textContent ="$" + gastos.toLocaleString("es-AR");
-
                 cuotasDiv.innerHTML="";
                 window.textoWA = 
                 `*Simulación Crédito Prendario*%0A%0A` +
@@ -736,9 +752,6 @@
                 }
 
                 textoWA += `%0AQuiero más información sobre este crédito.`;
-
-                btnWhatsApp.addEventListener("click", () => enviarWhatsApp(TEL));
-                document.getElementById("provincia").addEventListener("change", calcularTodo);
 
                 calcularUVA();
             }
@@ -843,6 +856,8 @@
                 calcularPrestamo();
             });*/
             anioVehiculo.addEventListener("change",calcularPrestamo);
+            btnWhatsApp.addEventListener("click", () => enviarWhatsApp(TEL));
+            document.getElementById("provincia").addEventListener("change", calcularTodo);
             /*montoFinanciar.addEventListener("input", () => {
                 soloNumeros(montoFinanciar);
                 calcularTodo();
