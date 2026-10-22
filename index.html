@@ -362,11 +362,17 @@
             .whatsapp-btn img{height:36px}
 
             /* ====== CONTACTOS ====== */
-            .contactos-grid{
+            /*.contactos-grid{
                 display:grid;
                 grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
                 gap:20px;
                 margin-top:20px;
+            }*/
+            .contactos-grid {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 20px;
+                margin-top: 20px;
             }
             .contacto-card{
                 background:#f8fafc;
@@ -415,6 +421,7 @@
                 .porcentajes-años{display:block;}
                 .info-ofertas{font-size:1rem;padding:14px;}
                 .card,.monto-card{min-width:0;}
+                .contactos-grid {grid-template-columns: minmax(0, 1fr);}
             }
         </style>
     </head>
