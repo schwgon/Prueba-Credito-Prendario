@@ -205,6 +205,12 @@
                 overflow-wrap: anywhere;
                 max-width:100%;
             }
+            .cuota-inicial{
+                margin-top:10px;
+                color:#72a091;
+                font-weight:bold;
+                font-size:1rem;
+            }
             .total{font-weight:bold}
             .coef{
                 margin-top:10px;
@@ -530,21 +536,25 @@
                         <div class="card card-cuota uva-card" data-plazo="24">
                             <div class="meses">24 meses</div>
                             <div class="cuota" id="uva24">—</div>
+                            <div class="cuota-inicial">Cuota inicial</div>
                         </div>
 
                         <div class="card card-cuota uva-card" data-plazo="36">
                             <div class="meses">36 meses</div>
                             <div class="cuota" id="uva36">—</div>
+                            <div class="cuota-inicial">Cuota inicial</div>
                         </div>
 
                         <div class="card card-cuota uva-card" data-plazo="48">
                             <div class="meses">48 meses</div>
                             <div class="cuota" id="uva48">—</div>
+                            <div class="cuota-inicial">Cuota inicial</div>
                         </div>
 
                         <div class="card card-cuota uva-card" data-plazo="60">
                             <div class="meses">60 meses</div>
                             <div class="cuota" id="uva60">—</div>
+                            <div class="cuota-inicial">Cuota inicial</div>
                         </div>
                     </div>
 
@@ -731,6 +741,7 @@
                     <div class="card card-cuota">
                         <div class="meses">${m} meses</div>
                         <div class="cuota">$${cuota.toLocaleString("es-AR")}</div>
+                        <div class="cuota-inicial">Cuota inicial</div>
                     </div>
                     `;
                     textoWA += `${m} meses → $${cuota.toLocaleString("es-AR")}%0A`;
