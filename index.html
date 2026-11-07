@@ -263,6 +263,19 @@
                 border-radius:14px;
                 font-weight:bold;
             }
+            .info-ofertas{
+                margin: 50px auto 0;
+                font-size: 0.9rem;
+                color: #363f4c;
+                background: #e7f4ec;
+                padding: 5px 12px;
+                border-radius: 5px;
+                display: block;
+                width: fit-content;
+                max-width: 100%;
+                min-width: 0;
+                overflow-wrap: anywhere;
+            }
 
             /* ====== SELECTOR TIPO DE PRÉSTAMO ====== */
             .selector-prestamo {
@@ -392,7 +405,7 @@
             }
 
             /* ====== MOBILE ====== */
-            @media(max-width:768px){
+            /*@media(max-width:768px){
                 body{padding:10px 6px;}
                 .container{width:100%;border-radius:16px;}
                 .inputs{grid-template-columns:minmax(0,1fr)}
@@ -404,6 +417,28 @@
                 .info-ofertas{font-size:1rem;padding:14px;}
                 .comparativa-titulo{font-size:1.55rem;margin-top:30px;}
                 .comparativa-tabla{min-width:560px;}
+                .card,.monto-card{min-width:0;}
+                .contactos-grid{grid-template-columns:minmax(0,1fr);}
+            }*/
+            
+            @media(max-width:768px){
+                body{padding:10px 6px;}
+                .container{width:100%;border-radius:16px;}
+                .inputs{grid-template-columns:minmax(0,1fr)}
+                .resultado-box{grid-template-columns:minmax(0,1fr)}
+                .cards-grid{grid-template-columns:minmax(0,1fr)}
+                .logo{height:200px;max-width:100%;object-fit:contain;}
+                .mensaje-consulta{font-size:30px;overflow-wrap:anywhere;}
+                .porcentajes-años{display:block;}
+                .info-ofertas{font-size:1rem;padding:14px;}
+                .comparativa-titulo{font-size:1.55rem;margin-top:30px;}
+
+                /* TABLA COMPARATIVA */
+                .comparativa-tabla{width:100%; min-width:0; border-spacing:4px 6px; table-layout:fixed;}
+                .comparativa-tabla th{padding:9px 3px; font-size:0.75rem; line-height:1.2; border-radius:6px; overflow-wrap:anywhere;}
+                .comparativa-tabla th span{font-size:0.68rem;margin-top:3px;}
+                .comparativa-tabla td{padding:12px 2px; font-size:0.85rem; height:55px; overflow-wrap:anywhere;}
+                .comparativa-tabla td:first-child{font-size:0.8rem;}
                 .card,.monto-card{min-width:0;}
                 .contactos-grid{grid-template-columns:minmax(0,1fr);}
             }
@@ -551,6 +586,10 @@
                         </tbody>
                     </table>
                 </div>
+
+                <p class="info-ofertas">
+                    Además del crédito prendario por vehículo, <strong>contamos con 5 ofertas más de financiación</strong> adaptadas a distintas necesidades.
+                </p>
 
                 <div id="selectorPrestamo" class="selector-prestamo">
                      <div class="selector-header">
