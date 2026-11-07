@@ -190,79 +190,69 @@
             .valor{font-size:2rem;font-weight:bold;color:#fbbf24}
             .neto{color:#86efac}
 
-            /* ====== CUOTAS ====== */
-            .card-cuota{
-                background:#f8fafc;
-                color:#0f172a;
-                border:3px solid #e2e8f0;
+            /* ====== COMPARATIVA DE CUOTAS ====== */
+            .comparativa-titulo{
+                margin:42px 0 18px;
+                text-align:center;
+                color:#1e293b;
+                font-size:2rem;
+                font-weight:800;
+                letter-spacing:.5px;
             }
-            .meses{font-size:1.5rem;font-weight:bold;color:#72a091}
-            .cuota{
-                font-size:2.2rem;
-                font-weight:900;
-                color:#72a091;
-                word-break: break-word;
-                overflow-wrap: anywhere;
-                max-width:100%;
+            .comparativa-wrapper{
+                width:100%;
+                overflow-x:auto;
+                margin:0 auto 30px;
+                padding:0 4px 4px;
             }
-            .cuota-inicial{
-                margin-top:10px;
-                color:#72a091;
-                font-weight:bold;
+            .comparativa-tabla{
+                width:100%;
+                min-width:620px;
+                border-collapse:separate;
+                border-spacing:12px 8px;
+                table-layout:fixed;
+                color:#1e293b;
+            }
+            .comparativa-tabla th{
+                background:#1e293b;
+                color:#fff;
+                padding:14px 10px;
+                border-radius:9px;
                 font-size:1rem;
+                line-height:1.25;
+                text-align:center;
             }
-            .total{font-weight:bold}
-            .coef{
-                margin-top:10px;
-                font-size:0.95rem;
-                font-weight:bold;
-                background:#0f172a;
-                color:#e5e7eb;
-                padding:6px 14px;
-                border-radius:20px;
-                display:inline-block;
-            }
-            .cuotas-grid{
-                display:grid;
-                grid-template-columns:repeat(3, minmax(0, 1fr));
-                gap:20px;
-                margin-top:30px;
-                width:100%;
-                min-width:0;
-            }
-            .info-ofertas{
-                margin:50px 0 0;
-                font-size:1.1rem;
-                color:#475569;
-                background:#e7f4ec;
-                padding:14px 20px;
-                border-radius:14px;
+            .comparativa-tabla th span{
                 display:block;
-                width:100%;
-                max-width:100%;
-                min-width:0;
-                overflow-wrap:anywhere;
+                font-size:.92rem;
+                font-weight:600;
             }
-
-            /* ====== UVA ====== */
-            .uva-cards-grid{
-                display:grid;
-                grid-template-columns:repeat(2, minmax(0, 1fr));
-                gap:20px;
-                margin-top:20px;
-                width:100%;
-                min-width:0;
+            .comparativa-tabla td{
+                background:#fff;
+                border:1px solid #d8dee3;
+                padding:18px 10px;
+                text-align:center;
+                font-size:1.25rem;
+                font-weight:800;
+                height:72px;
             }
-            .uva-card{
-                transition: transform .2s, box-shadow .2s;
+            .comparativa-tabla tbody tr:nth-child(odd) td{
+                background:#f1f3f3;
             }
-            .uva-card:hover{
-                transform: translateY(-4px);
-                box-shadow:0 15px 30px rgba(0,0,0,.15);
+            .comparativa-tabla td:first-child{
+                font-size:1.15rem;
+                color:#1e293b;
             }
-            .uva-card.inactiva{
+            .comparativa-tabla .valor-cuota{
+                color:#1e293b;
+            }
+            .comparativa-tabla .uva-celda.inactiva{
                 opacity:.45;
-                filter: grayscale(1);
+                filter:grayscale(1);
+            }
+            .comparativa-tabla .sin-cuota{
+                color:#a3a3a3;
+                font-weight:500;
             }
             .uva-msg{
                 display:none;
@@ -362,17 +352,11 @@
             .whatsapp-btn img{height:36px}
 
             /* ====== CONTACTOS ====== */
-            /*.contactos-grid{
+            .contactos-grid{
                 display:grid;
-                grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+                grid-template-columns: repeat(3, minmax(0, 1fr));
                 gap:20px;
                 margin-top:20px;
-            }*/
-            .contactos-grid {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 20px;
-                margin-top: 20px;
             }
             .contacto-card{
                 background:#f8fafc;
@@ -414,14 +398,14 @@
                 .inputs{grid-template-columns:minmax(0,1fr)}
                 .resultado-box{grid-template-columns:minmax(0,1fr)}
                 .cards-grid{grid-template-columns:minmax(0,1fr)}
-                .cuotas-grid{grid-template-columns:minmax(0,1fr)}
                 .logo{height:200px;max-width:100%;object-fit:contain;}
-                .uva-cards-grid{grid-template-columns:minmax(0,1fr)}
                 .mensaje-consulta{font-size:30px;overflow-wrap:anywhere;}
                 .porcentajes-años{display:block;}
                 .info-ofertas{font-size:1rem;padding:14px;}
+                .comparativa-titulo{font-size:1.55rem;margin-top:30px;}
+                .comparativa-tabla{min-width:560px;}
                 .card,.monto-card{min-width:0;}
-                .contactos-grid {grid-template-columns: minmax(0, 1fr);}
+                .contactos-grid{grid-template-columns:minmax(0,1fr);}
             }
         </style>
     </head>
@@ -527,47 +511,45 @@
                     </div>
                 </div>
 
-                <h2 class="prestamo-tradicional" id="prestamoTradicional">Préstamo Tradicional</h2>
+                <h2 class="comparativa-titulo">COMPARATIVA DE CUOTAS</h2>
 
-                <div class="cuotas-grid" id="cuotas"></div>
-
-                <p class="info-ofertas">
-                    Además del crédito prendario por vehículo, <strong>contamos con 5 ofertas más de financiación</strong> adaptadas a distintas necesidades.
-                </p>
-
-                <h2 class="prestamo-UVA" id="prestamoUVA">Préstamo Línea UVA</h2>
-
-                <div class="uva-box">
-
-                    <div class="uva-cards-grid" id="uvaCards">
-                        <div class="card card-cuota uva-card" data-plazo="24">
-                            <div class="meses">24 meses</div>
-                            <div class="cuota" id="uva24">—</div>
-                            <div class="cuota-inicial">Cuota inicial</div>
-                        </div>
-
-                        <div class="card card-cuota uva-card" data-plazo="36">
-                            <div class="meses">36 meses</div>
-                            <div class="cuota" id="uva36">—</div>
-                            <div class="cuota-inicial">Cuota inicial</div>
-                        </div>
-
-                        <div class="card card-cuota uva-card" data-plazo="48">
-                            <div class="meses">48 meses</div>
-                            <div class="cuota" id="uva48">—</div>
-                            <div class="cuota-inicial">Cuota inicial</div>
-                        </div>
-
-                        <div class="card card-cuota uva-card" data-plazo="60">
-                            <div class="meses">60 meses</div>
-                            <div class="cuota" id="uva60">—</div>
-                            <div class="cuota-inicial">Cuota inicial</div>
-                        </div>
-                    </div>
-
-                    <div id="uvaMensaje" class="uva-msg">
-                        Consulta a nuestro WhatsApp otras opciones para línea UVA
-                    </div>
+                <div class="comparativa-wrapper">
+                    <table class="comparativa-tabla">
+                        <thead>
+                            <tr>
+                                <th>PLAZO</th>
+                                <th>PRÉSTAMO TRADICIONAL<span>Cuota inicial</span></th>
+                                <th>PRÉSTAMO LÍNEA UVA<span>Cuota inicial</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12 meses</td>
+                                <td class="valor-cuota" id="trad12">$0</td>
+                                <td class="sin-cuota">-</td>
+                            </tr>
+                            <tr>
+                                <td>24 meses</td>
+                                <td class="valor-cuota" id="trad24">$0</td>
+                                <td class="valor-cuota uva-celda" id="uva24">—</td>
+                            </tr>
+                            <tr>
+                                <td>36 meses</td>
+                                <td class="valor-cuota" id="trad36">$0</td>
+                                <td class="valor-cuota uva-celda" id="uva36">—</td>
+                            </tr>
+                            <tr>
+                                <td>48 meses</td>
+                                <td class="valor-cuota" id="trad48">$0</td>
+                                <td class="valor-cuota uva-celda" id="uva48">—</td>
+                            </tr>
+                            <tr>
+                                <td>60 meses</td>
+                                <td class="valor-cuota" id="trad60">$0</td>
+                                <td class="valor-cuota uva-celda" id="uva60">—</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div id="selectorPrestamo" class="selector-prestamo">
@@ -616,16 +598,16 @@
                     </div>
 
                     <div class="contacto-card">
-                        <h4>Hugo Zarate</h4>
-                        <a href="#" onclick="enviarWhatsApp('5493571579050'); return false;">
-                            📱 3571 57-9050
+                        <h4>Damian Fernandez</h4>
+                        <a href="#" onclick="enviarWhatsApp('5493571311861'); return false;" target="_blank">
+                            📱 3571-311861
                         </a>
                     </div>
 
                     <div class="contacto-card">
-                        <h4>Damian Fernandez</h4>
-                        <a href="#" onclick="enviarWhatsApp('5493571311861')" target="_blank">
-                            📱 3571-311861
+                        <h4>Hugo Zarate</h4>
+                        <a href="#" onclick="enviarWhatsApp('5493571579050'); return false;" target="_blank">
+                            📱 3571 57-9050
                         </a>
                     </div>
 
@@ -637,16 +619,16 @@
                     </div>
 
                     <div class="contacto-card">
-                        <h4>Mariana Fererreya</h4>
-                        <a href="#" onclick="enviarWhatsApp('5493571311850'); return false;">
-                            📱 3571 311850
+                        <h4>Bianca Fernandez</h4>
+                        <a href="#" onclick="enviarWhatsApp('5493571311891'); return false;" target="_blank">
+                            📱 3571-311891
                         </a>
                     </div>
 
                     <div class="contacto-card">
-                        <h4>Bianca Fernandez</h4>
-                        <a href="#" onclick="enviarWhatsApp('5493571311891')" target="_blank">
-                            📱 3571-311891
+                        <h4>Mariana Fererreya</h4>
+                        <a href="#" onclick="enviarWhatsApp('5493571311850'); return false;" target="_blank">
+                            📱 3571 311850
                         </a>
                     </div>
                 </div>
@@ -664,7 +646,7 @@
                 cordoba: 500000,
                 santiago: 530000
             };
-            const COEF = {12:118.419, 24:73.253, 36:60.503, 48:54.750, 60:51.731};
+            const COEF = {12:120.514, 24:75.460, 36:62.863, 48:57.252, 60:54.354};
             const TEL = "5493571311891";
             const COEF_UVA = {24: 55.06065, 36: 41.35006, 48: 34.64069, 60: 30.72835};
 
@@ -746,7 +728,6 @@
                 mostrarMonto.textContent = "$"+monto.toLocaleString("es-AR");
                 mostrarNeto.textContent = neto>0 ? "$"+neto.toLocaleString("es-AR") : "Monto insuficiente";
 
-                cuotasDiv.innerHTML="";
                 window.textoWA = 
                 `*Simulación Crédito Prendario*%0A%0A` +
                 `Provincia: ${provinciaTexto}%0A%0A` +
@@ -758,13 +739,10 @@
                 for(let m in COEF){
                     const cuota = Math.round(monto*COEF[m]/1000);
 
-                    cuotasDiv.innerHTML += `
-                    <div class="card card-cuota">
-                        <div class="meses">${m} meses</div>
-                        <div class="cuota">$${cuota.toLocaleString("es-AR")}</div>
-                        <div class="cuota-inicial">Cuota inicial</div>
-                    </div>
-                    `;
+                    const celdaTradicional = document.getElementById("trad" + m);
+                    if (celdaTradicional) {
+                        celdaTradicional.textContent = "$" + cuota.toLocaleString("es-AR");
+                    }
                     textoWA += `${m} meses → $${cuota.toLocaleString("es-AR")}%0A`;
 
                 }
@@ -813,7 +791,7 @@
 
             function actualizarUVA(anio){
                 const msg = document.getElementById("uvaMensaje");
-                const cards = document.querySelectorAll(".uva-card");
+                const cards = document.querySelectorAll(".uva-celda");
                 const selector = document.getElementById("selectorPrestamo");
 
                 if(anio >= 2021){
