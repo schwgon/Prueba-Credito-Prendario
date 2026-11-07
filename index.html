@@ -698,6 +698,7 @@
             const COEF = {12:120.514, 24:75.460, 36:62.863, 48:57.252, 60:54.354};
             const TEL = "5493571311891";
             const COEF_UVA = {24: 55.06065, 36: 41.35006, 48: 34.64069, 60: 30.72835};
+            let montoMaximoUVAActual = 0;
 
 
             /* ====== ELEMENTOS ====== */
@@ -738,6 +739,7 @@
                 else{txtU="No disponible para este año";}
 
                 const maxUVA = porcU ? Math.floor(valor*porcU/100/1000)*1000 : 0;
+                montoMaximoUVAActual = maxUVA;
 
                 // document.getElementById("montoMaximoUVA").textContent = "$" + maxUVA.toLocaleString("es-AR");
                 const montoUVAEl = document.getElementById("montoMaximoUVA");
@@ -798,7 +800,7 @@
                 if (anio >= 2021) {
                     textoWA += `%0A*Cuotas UVA (estimadas):*%0A`;
                     for(let plazo in COEF_UVA){
-                        const cuotaUVA = Math.round((monto / 1000) * COEF_UVA[plazo]);
+                        const cuotaUVA = Math.round((montoMaximoUVAActual / 1000) * COEF_UVA[plazo]);
                         textoWA += `${plazo} meses → $${cuotaUVA.toLocaleString("es-AR")}%0A`;
                     }
                 }
@@ -808,20 +810,8 @@
                 calcularUVA();
             }
 
-            /*function calcularUVA(){
-                const monto = +montoFinanciar.value || 0;
-
-                if(monto <= 0) return;
-
-                for(let plazo in COEF_UVA){
-                    const cuota = Math.round((monto / 1000) * COEF_UVA[plazo]);
-                    document.getElementById("uva" + plazo).textContent =
-                        "$" + cuota.toLocaleString("es-AR");
-                }
-            }*/
-
             function calcularUVA(){
-                const monto = obtenerNumero(montoFinanciar);
+                const monto = montoMaximoUVAActual;
             
                 if(monto <= 0){
                     for(let plazo in COEF_UVA){
@@ -831,10 +821,11 @@
                     return;
                 }
                 for(let plazo in COEF_UVA){
-                    const cuota = Math.round(
-                        (monto / 1000) * COEF_UVA[plazo]
-                    );
-                    document.getElementById("uva" + plazo).textContent = "$" + cuota.toLocaleString("es-AR");
+                    const cuota = Math.round((monto / 1000) * COEF_UVA[plazo]);
+                    const el = document.getElementById("uva" + plazo);
+                    if(el){
+                        el.textContent = "$" + cuota.toLocaleString("es-AR");
+                    }
                 }
             }
 
@@ -846,14 +837,14 @@
                 if(anio >= 2021){
                     // UVA ACTIVO
                     cards.forEach(card => card.classList.remove("inactiva"));
-                    msg.style.display = "none";
+                    if(msg) msg.style.display = "none";
                     selector.style.display = "block";
 
                     calcularUVA();
                 }else{
                     // UVA NO DISPONIBLE
                     cards.forEach(card => card.classList.add("inactiva"));
-                    msg.style.display = "block";
+                    if(msg) msg.style.display = "block";
                     selector.style.display = "none";
 
                     // 👉 Mostrar $0 en todas las cuotas UVA
