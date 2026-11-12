@@ -277,9 +277,11 @@
                 font-weight:800;
             }
             .comparativa-tabla .sin-cuota{
-                background:transparent !important;
+                /*background:transparent !important;
                 border-color:transparent !important;
-                box-shadow:none !important;
+                box-shadow:none !important;*/
+                opacity:.45;
+                filter:grayscale(1);
             }
             .provincia-selector{
                 margin:10px auto 22px;
@@ -294,10 +296,10 @@
                 opacity:.45;
                 filter:grayscale(1);
             }
-            .comparativa-tabla .sin-cuota{
+            /*.comparativa-tabla .sin-cuota{
                 color:#a3a3a3;
                 font-weight:500;
-            }
+            }*/
             .uva-msg{
                 display:none;
                 margin-top:18px;
@@ -627,7 +629,7 @@
                             <tr>
                                 <td>12 meses</td>
                                 <td class="valor-cuota" id="trad12">$0</td>
-                                <td class="sin-cuota" aria-label="No disponible"></td>
+                                <td class="valor-cuota sin-cuota">No aplica</td>
                             </tr>
                             <tr>
                                 <td>24 meses</td>
@@ -792,7 +794,7 @@
             }
 
             function formatearPesos(input) {
-                const valor = String(input.value).replace(/\D/g, "");
+                const valor = String(input.value).replace(/\D/g, "").slice(0, 10);
                 input.value = valor ? Number(valor).toLocaleString("es-AR") : "";
             }
 
@@ -886,7 +888,7 @@
                     : "";
                 montoUVAInput.value = montoMaximoUVAActual
                     ? montoMaximoUVAActual.toLocaleString("es-AR")
-                    : "";
+                    : "No aplica";
 
                 montoTradicionalInput.disabled = montoMaximoTradicionalActual <= 0;
                 montoUVAInput.disabled = montoMaximoUVAActual <= 0;
@@ -917,7 +919,7 @@
                 document.getElementById("netoUVA").textContent =
                     montoMaximoUVAActual > 0
                         ? (netoUVA > 0 ? formatearImporte(netoUVA) : "Monto insuficiente")
-                        : "";
+                        : "$0";
 
                 // Cuotas tradicionales: se calculan exclusivamente con su propio monto.
                 for (const plazo in COEF) {
@@ -933,7 +935,7 @@
 
                     celda.textContent = montoMaximoUVAActual > 0
                         ? formatearImporte(Math.round((montoUVA / 1000) * COEF_UVA[plazo]))
-                        : "";
+                        : "$0";
                 }
             }
 
@@ -947,11 +949,11 @@
 
                 celdasUVA.forEach(celda => {
                     celda.classList.toggle("inactiva", !disponible);
-                    if (!disponible) celda.textContent = "";
+                    if (!disponible) celda.textContent = "$0";
                 });
 
                 if (!disponible) {
-                    document.getElementById("netoUVA").textContent = "";
+                    document.getElementById("netoUVA").textContent = "$0";
                 }
             }
 
